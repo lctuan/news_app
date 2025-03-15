@@ -6,17 +6,33 @@ plugins {
 }
 
 android {
+    flavorDimensions += "flavor-type"
+
+    productFlavors {
+        dev {
+            dimension "flavor-type"
+            applicationId "com.example.news_app"
+            resValue "string", "app_name", "(Dev) news_app"
+
+        }
+        prod {
+            dimension "flavor-type"
+            applicationId "com.example.news_app"
+            resValue "string", "app_name", "news_app"
+            // resValue "string", "ads_app_id", "ca-app-pub-7117777112918698~5642137430"
+
+        }
+    }
     namespace = "com.example.news_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17 // Sửa thành 17
+        targetCompatibility JavaVersion.VERSION_17
     }
-
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = '17' // Sửa thành 17
     }
 
     defaultConfig {
@@ -42,7 +58,16 @@ android {
 flutter {
     source = "../.."
 }
+dependencies {
+    implementation 'androidx.annotation:annotation:1.9.1'
+
+    // implementation 'com.android.support:support-annotations:28.0.0'
+}
 android {
-    namespace "com.example.news_app"  // Thêm dòng này
+    compileSdkVersion 36  // Đảm bảo trùng với phiên bản SDK đã cài
+    defaultConfig {
+        targetSdkVersion 34  // Cập nhật lên phiên bản mới nhất
+        minSdkVersion flutter.minSdkVersion    // Giữ nguyên hoặc điều chỉnh theo yêu cầu
+    }
 }
 
